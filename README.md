@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Client Website + Admin Dashboard + Super Admin-ready structure
 
-## Getting Started
+Their current site already has phone, email, many services, locations, callback form, reviews, quote tool, and emergency plumbing focus. So our system should keep those business parts but make them cleaner, faster, more trackable, and admin-controlled.
 
-First, run the development server:
+1. First architecture
+Public Website
+  - Homepage
+  - Services
+  - Service Detail Pages
+  - Locations
+  - About
+  - Reviews
+  - Contact
+  - Instant Quote
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Admin Dashboard
+  - Overview
+  - Leads / Forms
+  - Services Manager
+  - Location Pages
+  - Reviews
+  - SEO Health
+  - Analytics
+  - Settings
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Super Admin later
+  - Clients
+  - Templates
+  - Deployments
+  - Security Logs
+  - Connector Settings
+2. Create folders now
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run this in terminal:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+mkdir components components/layout components/sections components/ui components/dashboard config lib types data
+mkdir app/dashboard app/services app/locations app/contact app/about
+3. Recommended structure
+app/
+  page.tsx
+  layout.tsx
+  globals.css
+  services/
+    page.tsx
+  locations/
+    page.tsx
+  contact/
+    page.tsx
+  about/
+    page.tsx
+  dashboard/
+    page.tsx
 
-## Learn More
+components/
+  layout/
+    Navbar.tsx
+    Footer.tsx
 
-To learn more about Next.js, take a look at the following resources:
+  sections/
+    Hero.tsx
+    TrustBar.tsx
+    CallbackForm.tsx
+    ServicesGrid.tsx
+    QuoteEstimator.tsx
+    Reviews.tsx
+    Locations.tsx
+    CTA.tsx
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  dashboard/
+    DashboardOverview.tsx
+    LeadsTable.tsx
+    SEOScoreCard.tsx
+    AnalyticsCards.tsx
+    ConnectorStatus.tsx
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  ui/
+    Button.tsx
+    Card.tsx
+    Badge.tsx
 
-## Deploy on Vercel
+config/
+  site.ts
+  theme.ts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+data/
+  services.ts
+  locations.ts
+  reviews.ts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+lib/
+  seo.ts
+  utils.ts
+  lead-tracking.ts
+  seo-checker.ts
+
+types/
+  index.ts
+4. Install packages
+npm install lucide-react framer-motion clsx tailwind-merge react-hook-form zod
+
+Later:
+
+npm install @supabase/supabase-js
+5. First files to create
+
+Start with these only:
+
+config/site.ts
+data/services.ts
+data/locations.ts
+components/layout/Navbar.tsx
+components/sections/Hero.tsx
+components/sections/CallbackForm.tsx
+components/sections/ServicesGrid.tsx
+components/sections/QuoteEstimator.tsx
+components/dashboard/DashboardOverview.tsx
+app/page.tsx
+app/dashboard/page.tsx
+6. First build goal
+
+For now, build:
+
+Homepage
+Dashboard mockup
+SEO score card
+Leads card
+WhatsApp/call click card
+Quote request card
+
+Do not add database yet. First make the UI and structure strong. Then we connect Supabase.
