@@ -1,0 +1,153 @@
+name: Branch Sync Helper
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Branch to sync with main. Leave empty to use the branch selected in Run workflow."
+        required: false
+        default: ""
+      base_branch:
+        description: "Base branch to pull updates from"
+        required: true
+        default: "main"
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve input branches
+        id: vars
+        env:
+          INPUT_TARGET: ${{ github.event.inputs.target_branch }}
+          INPUT_BASE: ${{ github.event.inputs.base_branch }}
+        run: |
+          target="$INPUT_TARGET"
+          if [ -z "$target" ]; then
+            target="${GITHUB_REF_NAME}"
+          fi
+
+          base="$INPUT_BASE"
+          if [ -z "$base" ]; then
+            base="main"
+          fi
+
+          if [ "$target" = "$base" ]; then
+            echo "Target branch and base branch cannot be the same."
+            exit 1
+          fi
+
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch branches
+        run: |
+          git fetch origin "${{ steps.vars.outputs.base }}" "${{ steps.vars.outputs.target }}"
+
+      - name: Verify target branch exists
+        run: |
+          if ! git show-ref --verify --quiet "refs/remotes/origin/${{ steps.vars.outputs.target }}"; then
+            echo "Target branch does not exist on origin: ${{ steps.vars.outputs.target }}"
+            exit 1
+          fi
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Checkout target branch
+        run: |
+          git checkout -B "${{ steps.vars.outputs.target }}" "origin/${{ steps.vars.outputs.target }}"
+
+      - name: Attempt merge from base into target
+        id: merge
+        continue-on-error: true
+        run: |
+          git merge --no-ff --no-edit "origin/${{ steps.vars.outputs.base }}"
+
+      - name: Push synced branch
+        if: steps.merge.outcome == 'success'
+        run: |
+          git push origin "${{ steps.vars.outputs.target }}"
+          echo "Branch sync succeeded: ${{ steps.vars.outputs.base }} -> ${{ steps.vars.outputs.target }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Collect conflict files
+        if: steps.merge.outcome != 'success'
+        id: conflicts
+        run: |
+          files=$(git diff --name-only --diff-filter=U | paste -sd "," -)
+          if [ -z "$files" ]; then
+            files="unknown"
+          fi
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          git merge --abort || true
+
+      - name: Open conflict helper issue
+        if: steps.merge.outcome != 'success'
+        uses: actions/github-script@v7
+        env:
+          TARGET_BRANCH: ${{ steps.vars.outputs.target }}
+          BASE_BRANCH: ${{ steps.vars.outputs.base }}
+          CONFLICT_FILES: ${{ steps.conflicts.outputs.files }}
+        with:
+          script: |
+            const title = `[merge-conflict-helper] Sync ${process.env.TARGET_BRANCH} with ${process.env.BASE_BRANCH}`;
+            const body = [
+              'Automatic sync detected merge conflicts.',
+              '',
+              `- Target branch: ${process.env.TARGET_BRANCH}`,
+              `- Base branch: ${process.env.BASE_BRANCH}`,
+              `- Conflicting files: ${process.env.CONFLICT_FILES}`,
+              '',
+              'Recommended local steps:',
+              '1. git checkout ' + process.env.TARGET_BRANCH,
+              '2. git pull origin ' + process.env.TARGET_BRANCH,
+              '3. git merge origin/' + process.env.BASE_BRANCH,
+              '4. Resolve conflicts file by file',
+              '5. git add .',
+              '6. git commit -m "fix: resolve merge conflicts"',
+              '7. git push origin ' + process.env.TARGET_BRANCH,
+              '',
+              'Tip: Keep commits small and sync with main daily to reduce future conflicts.'
+            ].join('\n');
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const existing = issues.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['bug', 'priority:high']
+              });
+            }
+
+      - name: Fail run when conflicts are found
+        if: steps.merge.outcome != 'success'
+        run: |
+          echo "Merge conflicts found. See created issue for guidance."
+          exit 1

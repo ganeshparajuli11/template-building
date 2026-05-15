@@ -1,0 +1,33 @@
+frontend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "app/**"
+          - "components/**"
+          - "public/**"
+
+backend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "lib/**"
+          - "config/**"
+          - "data/**"
+          - "types/**"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**"
+          - "README.md"
+
+security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/security.yml"
+          - "docs/SECURITY.md"
+
+seo:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/SEO.md"
+          - "lib/seo.ts"
+          - "app/**/page.tsx"

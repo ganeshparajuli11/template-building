@@ -1,0 +1,40 @@
+name: Project Automation
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate configuration
+        id: config
+        env:
+          PROJECT_URL: ${{ vars.GITHUB_PROJECT_URL }}
+          PROJECT_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        run: |
+          if [ -n "$PROJECT_URL" ] && [ -n "$PROJECT_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Add issue or PR to project board
+        if: steps.config.outputs.enabled == 'true'
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: ${{ vars.GITHUB_PROJECT_URL }}
+          github-token: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+
+      - name: Configuration missing notice
+        if: steps.config.outputs.enabled != 'true'
+        run: |
+          echo "Skipping project automation. Set repository variable GITHUB_PROJECT_URL and secret PROJECT_AUTOMATION_TOKEN."

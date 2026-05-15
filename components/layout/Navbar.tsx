@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import Button from "@/components/ui/Button";
 import { ContactActions } from "@/components/ui/ContactActions";
 
 const navItems = [

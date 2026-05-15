@@ -1,0 +1,63 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-label based on issue form type
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = (issue.title || '').toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+
+            const labels = new Set();
+            if (title.includes('bug') || body.includes('bug') || body.includes('error')) labels.add('bug');
+            if (title.includes('feature') || body.includes('feature request')) labels.add('feature');
+            if (body.includes('security') || title.includes('security')) labels.add('security');
+            if (body.includes('seo')) labels.add('seo');
+            if (body.includes('ui') || body.includes('ux') || body.includes('design')) labels.add('ui-ux');
+            if (body.includes('api') || body.includes('database') || body.includes('backend')) labels.add('backend');
+            if (body.includes('frontend') || body.includes('component') || body.includes('page')) labels.add('frontend');
+
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: Array.from(labels)
+              });
+            }
+
+      - name: Post first-response checklist
+        if: github.event.action == 'opened'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const comment = [
+              'Thanks for opening this issue. Quick triage checklist for faster turnaround:',
+              '',
+              '- Confirm reproducible steps',
+              '- Add expected vs actual behavior',
+              '- Add screenshots or logs if available',
+              '- Add priority context (high, medium, low)',
+              '- Link related PR or issue if any',
+              '',
+              'For security concerns, avoid posting secrets and use responsible disclosure.'
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: comment
+            });
