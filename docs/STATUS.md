@@ -16,6 +16,7 @@ OPEDS Melbourne PDS demo
 - Added project automation workflow to auto-add issues and PRs to GitHub Project
 - Added uptime monitor workflow with auto open/close incident issue
 - Added Dependabot weekly npm updates
+- Added Dependabot auto-merge workflow for safe npm patch/minor updates
 - Added issue templates and PR template
 - Fixed FAQ build blocker by extending Card component props for onClick support
 - Cleaned Navbar unused import warning
@@ -30,6 +31,7 @@ OPEDS Melbourne PDS demo
 - .github/ISSUE_TEMPLATE/config.yml
 - .github/workflows/ci.yml
 - .github/workflows/security.yml
+- .github/workflows/dependabot-auto-merge.yml
 - .github/workflows/pr-labeler.yml
 - .github/workflows/issue-triage.yml
 - .github/workflows/stale.yml
@@ -40,12 +42,13 @@ OPEDS Melbourne PDS demo
 - components/ui/Card.tsx
 
 ## Current Focus
-Stabilize automated workflows and tune thresholds for solo or duo daily use.
+Stabilize automated workflows and reduce manual dependency maintenance effort.
 
 ## Next Step
 - Add repository variable PRODUCTION_URL
 - Add repository variable GITHUB_PROJECT_URL
 - Add repository secret PROJECT_AUTOMATION_TOKEN
+- Enable repository setting: Allow auto-merge
 - Run "Sync Labels" workflow once manually
 - Protect main branch with required checks (CI + Security)
 
