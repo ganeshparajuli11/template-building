@@ -1,130 +1,62 @@
-Client Website + Admin Dashboard + Super Admin-ready structure
+# OPEDS Portfolio
 
-Their current site already has phone, email, many services, locations, callback form, reviews, quote tool, and emergency plumbing focus. So our system should keep those business parts but make them cleaner, faster, more trackable, and admin-controlled.
+OPEDS is a Next.js application for the Melbourne PDS demo, focused on a clean public website, reusable UI components, and a lightweight dashboard preview.
 
-1. First architecture
-Public Website
-  - Homepage
-  - Services
-  - Service Detail Pages
-  - Locations
-  - About
-  - Reviews
-  - Contact
-  - Instant Quote
+## Tech Stack
 
-Admin Dashboard
-  - Overview
-  - Leads / Forms
-  - Services Manager
-  - Location Pages
-  - Reviews
-  - SEO Health
-  - Analytics
-  - Settings
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- React Hook Form + Zod
 
-Super Admin later
-  - Clients
-  - Templates
-  - Deployments
-  - Security Logs
-  - Connector Settings
-2. Create folders now
+## Project Structure
 
-Run this in terminal:
+- app: route pages
+- components: reusable UI, sections, and dashboard widgets
+- config: site and theme configuration
+- data: static content and mock data
+- docs: project rules and workflow documentation
+- lib: shared utilities
 
-mkdir components components/layout components/sections components/ui components/dashboard config lib types data
-mkdir app/dashboard app/services app/locations app/contact app/about
-3. Recommended structure
-app/
-  page.tsx
-  layout.tsx
-  globals.css
-  services/
-    page.tsx
-  locations/
-    page.tsx
-  contact/
-    page.tsx
-  about/
-    page.tsx
-  dashboard/
-    page.tsx
+## Main Routes
 
-components/
-  layout/
-    Navbar.tsx
-    Footer.tsx
+- /: public homepage
+- /about
+- /contact
+- /services
+- /locations
+- /dashboard
 
-  sections/
-    Hero.tsx
-    TrustBar.tsx
-    CallbackForm.tsx
-    ServicesGrid.tsx
-    QuoteEstimator.tsx
-    Reviews.tsx
-    Locations.tsx
-    CTA.tsx
+## Local Development
 
-  dashboard/
-    DashboardOverview.tsx
-    LeadsTable.tsx
-    SEOScoreCard.tsx
-    AnalyticsCards.tsx
-    ConnectorStatus.tsx
+Install dependencies:
 
-  ui/
-    Button.tsx
-    Card.tsx
-    Badge.tsx
+```bash
+npm install
+```
 
-config/
-  site.ts
-  theme.ts
+Run development server:
 
-data/
-  services.ts
-  locations.ts
-  reviews.ts
+```bash
+npm run dev
+```
 
-lib/
-  seo.ts
-  utils.ts
-  lead-tracking.ts
-  seo-checker.ts
+Quality checks:
 
-types/
-  index.ts
-4. Install packages
-npm install lucide-react framer-motion clsx tailwind-merge react-hook-form zod
+```bash
+npm run lint
+npm run build
+```
 
-Later:
+## GitHub Automation
 
-npm install @supabase/supabase-js
-5. First files to create
+This repo includes GitHub Actions for:
 
-Start with these only:
-
-config/site.ts
-data/services.ts
-data/locations.ts
-components/layout/Navbar.tsx
-components/sections/Hero.tsx
-components/sections/CallbackForm.tsx
-components/sections/ServicesGrid.tsx
-components/sections/QuoteEstimator.tsx
-components/dashboard/DashboardOverview.tsx
-app/page.tsx
-app/dashboard/page.tsx
-6. First build goal
-
-For now, build:
-
-Homepage
-Dashboard mockup
-SEO score card
-Leads card
-WhatsApp/call click card
-Quote request card
-
-Do not add database yet. First make the UI and structure strong. Then we connect Supabase.
+- CI lint and build checks
+- Security scanning and dependency review
+- Dependabot updates
+- PR labeling and issue triage
+- Stale issue/PR cleanup
+- Manual branch sync helper for merge conflict guidance
+- Optional project board automation and uptime monitoring
