@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import ServicesGrid from "@/components/sections/ServicesGrid";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+	title: "Plumbing Services Melbourne | Blocked Drains, Hot Water & More",
+	description:
+		"Full-range plumbing services in Melbourne: blocked drains, burst pipes, hot water systems, leak detection, bathroom renovations & more. Call Melbourne PDS today.",
+	path: "/services",
+	keywords: [
+		"plumbing services Melbourne",
+		"blocked drain plumber Melbourne",
+		"hot water system Melbourne",
+		"leak detection Melbourne",
+		"burst pipe repair Melbourne",
+		"bathroom renovation plumber Melbourne",
+	],
+});
 
 export default function ServicesPage() {
   return (

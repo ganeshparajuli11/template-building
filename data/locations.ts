@@ -2,21 +2,21 @@ import type { Location } from "@/types";
 
 export const locations: Location[] = [
   {
-    id: "loc-kathmandu",
-    city: "Kathmandu",
-    area: "Lazimpat, Baluwatar, Kalanki",
-    responseTime: "20-35 mins",
+  id: "loc-inner-east",
+  city: "Inner East",
+  area: "Richmond, Hawthorn, Kew",
+  responseTime: "20-35 mins",
   },
   {
-    id: "loc-lalitpur",
-    city: "Lalitpur",
-    area: "Jawalakhel, Pulchowk, Satdobato",
-    responseTime: "25-40 mins",
+  id: "loc-south-east",
+  city: "South East",
+  area: "Glen Waverley, Clayton, Dandenong",
+  responseTime: "25-40 mins",
   },
   {
-    id: "loc-bhaktapur",
-    city: "Bhaktapur",
-    area: "Suryabinayak, Madhyapur, Sallaghari",
+  id: "loc-west-north",
+  city: "West and North",
+  area: "Point Cook, Sunshine, Broadmeadows",
     responseTime: "35-50 mins",
   },
 ];

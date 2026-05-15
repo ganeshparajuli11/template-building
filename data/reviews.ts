@@ -3,20 +3,20 @@ import type { Review } from "@/types";
 export const reviews: Review[] = [
   {
     id: "rev-1",
-    author: "Aarav Shrestha",
+  author: "James R., Richmond",
     rating: 5,
-    text: "They arrived in 25 minutes and fixed our burst pipe the same night.",
+  text: "They arrived quickly and fixed our burst pipe the same night. Clear communication from start to finish.",
   },
   {
     id: "rev-2",
-    author: "Mina Karki",
+  author: "Priya S., Point Cook",
     rating: 5,
-    text: "The quote was clear, team was polite, and the dashboard follow-up was fast.",
+  text: "Transparent quote, polite team, and the job was completed exactly as promised.",
   },
   {
     id: "rev-3",
-    author: "Sujan Gurung",
+  author: "Michael T., Glen Waverley",
     rating: 4,
-    text: "Great service and clear communication from callback to completion.",
+  text: "Great emergency response and practical advice to prevent the drain issue returning.",
   },
 ];

@@ -1,4 +1,4 @@
-const trustItems = ["24/7 Emergency Team", "Licensed Technicians", "Transparent Quotes", "Local Area Coverage"];
+const trustItems = ["24/7 Emergency Team", "Licensed Technicians", "Transparent Quotes", "Melbourne Metro Coverage"];
 
 export default function TrustBar() {
   return (

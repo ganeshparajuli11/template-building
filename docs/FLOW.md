@@ -1,64 +1,36 @@
-Create this file:
-
-```txt
-docs/FLOW.md
-```
-
-Paste this inside:
-
-````md
 # FLOW.md
 
 ## OPEDS AI Development Workflow
 
-This file tells any AI coding assistant how to work on this project without losing context, breaking architecture, or hallucinating.
+This document defines how AI assistants should work in this repository without losing context, breaking architecture, or hallucinating project state.
 
-Before starting any new task, the AI must read the project rule files first.
+Read this file before any new coding task.
 
 ---
 
-# 1. Required Reading Order
+## 1. Required Reading Order
 
-Before writing code, changing code, or suggesting architecture, read these files in this order:
+Before writing code, changing code, or proposing architecture, read these files in this order:
 
-```txt
 1. docs/PROJECTPLAN.md
 2. docs/SECURITY.md
 3. docs/UI_UX.md
 4. docs/FRONTEND.md
 5. docs/BACKEND.md
 6. docs/SEO.md
-````
 
-If the task is design/UI related, pay extra attention to:
+Task-specific focus:
 
-```txt
-docs/UI_UX.md
-docs/FRONTEND.md
-```
-
-If the task is API/database/backend related, pay extra attention to:
-
-```txt
-docs/SECURITY.md
-docs/BACKEND.md
-```
-
-If the task is SEO/performance related, pay extra attention to:
-
-```txt
-docs/SEO.md
-docs/FRONTEND.md
-```
+- UI/design tasks: docs/UI_UX.md, docs/FRONTEND.md
+- API/database/backend tasks: docs/SECURITY.md, docs/BACKEND.md
+- SEO/performance tasks: docs/SEO.md, docs/FRONTEND.md
 
 ---
 
-# 2. Start Every New Task Like This
+## 2. Task Classification Before Coding
 
-Before coding, the AI must identify:
+Before implementation, classify the task type:
 
-```txt
-Task type:
 - Frontend
 - Backend
 - Security
@@ -69,122 +41,82 @@ Task type:
 - Content
 - Refactor
 - Bug fix
-```
 
-Then check the related rule files.
-
-Example:
-
-```txt
-Task: Build hero section
-Type: Frontend + UI/UX + SEO
-Read:
-- UI_UX.md
-- FRONTEND.md
-- SEO.md
-```
-
-Example:
-
-```txt
-Task: Create contact form API
-Type: Backend + Security
-Read:
-- BACKEND.md
-- SECURITY.md
-```
+Then read only the relevant standards in detail before editing.
 
 ---
 
-# 3. Never Start Blindly
+## 3. Never Start Blindly
 
-The AI must not:
+Do not:
 
-```txt
-[ ] Create random folder structure
-[ ] Ignore existing files
-[ ] Put all code in one file
-[ ] Skip project rules
-[ ] Add packages without reason
-[ ] Hard-code repeated content
-[ ] Ignore security
-[ ] Ignore mobile UX
-[ ] Ignore SEO
-[ ] Break existing working code
-```
+- Create random folder structures
+- Ignore existing files and patterns
+- Put all logic in one file
+- Skip project rules
+- Add packages without clear reason
+- Hard-code repeated content
+- Ignore security, mobile UX, or SEO
+- Break working code for large speculative rewrites
 
-The AI must first inspect current files before editing.
+Always inspect current files before editing.
 
 ---
 
-# 4. Context Preservation Rule
+## 4. Context Preservation Rule
 
-At the end of every major coding step, update or create:
+At the end of each major coding step, update docs/STATUS.md.
 
-```txt
-docs/STATUS.md
-```
+STATUS.md should include:
 
-This file should contain:
+- Current phase
+- Completed work
+- Files changed
+- Next task
+- Known issues
+- Commands run
+- Important decisions
 
-```txt
-Current phase
-Completed work
-Files changed
-Next task
-Known issues
-Commands run
-Important decisions
-```
-
-This helps continue work when Claude, GPT, Cursor, or any AI hits token/context limit.
+This allows cross-session continuity across Claude, ChatGPT, Gemini, Cursor, and Copilot.
 
 ---
 
-# 5. STATUS.md Format
+## 5. STATUS.md Standard Format
 
-Use this format:
+Use this structure:
 
 ```md
 # STATUS.md
 
 ## Current Phase
-Phase 1 — Public Website MVP
+...
 
 ## Last Completed Work
-- Created Navbar
-- Created Hero section
-- Added global theme variables
+- ...
 
 ## Files Changed
-- components/layout/Navbar.tsx
-- components/sections/Hero.tsx
-- app/page.tsx
-- app/globals.css
+- ...
 
 ## Current Issue
-- Mobile menu needs improvement
+- ...
 
 ## Next Step
-- Build TrustBar and ServicesGrid
+- ...
 
 ## Commands Run
-npm run dev
+- ...
 
 ## Notes
-Keep Melbourne PDS logo unchanged.
-Follow UI_UX.md for older user readability.
+...
 ```
 
-Always keep this file updated.
+Keep it current after meaningful progress.
 
 ---
 
-# 6. If AI Token Limit Is Close
+## 6. Token Limit / Handover Rule
 
-If the AI is running out of context/token, it must stop and write a handover summary.
-
-Use this format:
+If context is near limit, stop and write a handover summary using this format:
 
 ```md
 # HANDOVER
@@ -208,251 +140,198 @@ Use this format:
 ...
 ```
 
-Then the next AI can continue without guessing.
+---
+
+## 7. Cross-AI Continuation Rule
+
+Before continuing work from another AI session, read:
+
+1. docs/FLOW.md
+2. docs/STATUS.md
+3. docs/PROJECTPLAN.md
+
+Then read task-specific rule files.
+
+Do not rely on memory-only continuation.
 
 ---
 
-# 7. Cross-AI Continuation Rule
+## 8. Commit Quality Rule
 
-This project may be continued across:
+After each stable step:
 
-```txt
-Claude
-ChatGPT
-Gemini
-Cursor
-GitHub Copilot
-```
+1. Run checks:
+   - npm run lint
+   - npm run build
+2. Fix failures before commit.
+3. Commit only working code.
 
-So every AI must rely on project documents, not memory.
+Suggested commit styles:
 
-Before continuing, read:
-
-```txt
-docs/FLOW.md
-docs/STATUS.md
-docs/PROJECTPLAN.md
-```
-
-Then read the specific rule files based on task.
+- feat: add hero section
+- feat: add dashboard overview
+- fix: improve mobile navigation
+- docs: add backend standards
+- refactor: move services data to data folder
+- security: add validation schema
+- seo: add metadata helper
 
 ---
 
-# 8. Git Commit Rule
+## 9. Branch Rule
 
-After each stable step, commit changes.
-
-Suggested commit style:
-
-```txt
-feat: add hero section
-feat: add dashboard overview
-fix: improve mobile navigation
-docs: add backend standards
-refactor: move services data to data folder
-security: add validation schema
-seo: add metadata helper
-```
-
-Do not commit broken code.
-
-Before commit:
-
-```bash
-npm run lint
-npm run build
-```
-
-If build fails, fix before committing.
-
----
-
-# 9. Branch Rule
-
-Use branches for bigger work.
+Use feature/fix branches for larger changes.
 
 Examples:
 
-```txt
-feature/public-homepage
-feature/admin-dashboard
-feature/lead-api
-feature/seo-engine
-fix/mobile-navbar
-```
+- feature/public-homepage
+- feature/admin-dashboard
+- feature/lead-api
+- feature/seo-engine
+- fix/mobile-navbar
 
-Do not do large risky changes directly on main.
+Avoid large risky changes directly on main.
 
 ---
 
-# 10. Package Installation Rule
+## 10. Package Installation Rule
 
-Before installing any package, AI must explain:
+Before installing any package, explain:
 
-```txt
-Package name
-Why it is needed
-Can we do without it?
-Is it lightweight?
-Is it maintained?
-Security risk?
-```
+- Package name
+- Why it is needed
+- Whether existing code can solve it
+- Package weight and maintenance
+- Security risk profile
 
-Avoid installing heavy packages for small tasks.
+Avoid heavy dependencies for small tasks.
 
 ---
 
-# 11. Design Rule
+## 11. Design Rule
 
-When building UI, always follow:
+When building UI:
 
-```txt
-Readable text
-Strong contrast
-Mobile-first
-Older user friendly
-Clear CTA
-Simple navigation
-Existing Melbourne PDS logo unchanged
-Blue/green brand palette
-Orange only for emergency CTA
-```
-
-Do not create tiny text or low-contrast design.
+- Keep text readable
+- Maintain strong contrast
+- Design mobile-first
+- Keep older-user readability in mind
+- Keep navigation simple
+- Use clear CTA hierarchy
+- Keep Melbourne PDS logo unchanged
+- Use blue/green palette
+- Use orange only for urgent CTA emphasis
 
 ---
 
-# 12. Frontend Rule
+## 12. Frontend Rule
 
-Frontend must follow:
+Frontend implementation must prioritize:
 
-```txt
-Reusable components
-Clean pages
-Content from data/config files
-Global CSS variables
-Server components by default
-"use client" only when needed
-Semantic HTML
-SEO metadata
-Optimized images
-Responsive layout
-```
+- Reusable components
+- Clean route pages
+- Content from data/config files
+- Global CSS variables
+- Server components by default
+- "use client" only when required
+- Semantic HTML
+- SEO metadata coverage
+- Optimized assets
+- Responsive layouts
 
 ---
 
-# 13. Backend Rule
+## 13. Backend Rule
 
-Backend must follow:
+Backend implementation must prioritize:
 
-```txt
-Thin API routes
-Service layer
-Zod validation
-Safe response format
-No raw errors
-No exposed secrets
-business_id isolation
-Rate limit planning
-Audit logging planning
-Provider-agnostic connectors
-```
+- Thin API routes
+- Service layer separation
+- Zod validation
+- Safe response shape
+- No raw errors leaked
+- No exposed secrets
+- business_id isolation
+- Rate-limit planning
+- Audit logging planning
+- Provider-agnostic connector design
 
 ---
 
-# 14. Security Rule
+## 14. Security Rule
 
-Before creating forms, APIs, uploads, auth, or dashboard logic, check:
+Before forms, APIs, uploads, auth, or dashboard logic:
 
-```txt
-SECURITY.md
-BACKEND.md
-```
+1. Review docs/SECURITY.md
+2. Review docs/BACKEND.md
 
-Security rules:
+Security basics:
 
-```txt
-Validate input
-Never trust frontend
-No raw SQL
-No exposed API keys
-No unsafe HTML
-No cross-tenant data leakage
-No secrets in GitHub
-No stack traces in production
-```
+- Validate all input
+- Never trust frontend checks
+- No raw SQL concatenation
+- No exposed API keys/secrets
+- No unsafe HTML rendering
+- No cross-tenant leakage
+- No production stack trace exposure
 
 ---
 
-# 15. SEO Rule
+## 15. SEO Rule
 
-Every public page must include:
+Every public page should include:
 
-```txt
-One H1
-Meta title
-Meta description
-Canonical URL
-Open Graph metadata
-Internal links
-Alt text
-Fast loading
-Mobile responsive layout
-Schema if needed
-```
+- One H1
+- Meta title
+- Meta description
+- Canonical URL
+- Open Graph metadata
+- Internal links
+- Alt text for images
+- Fast loading
+- Mobile responsiveness
+- Schema where appropriate
 
-Follow:
-
-```txt
-docs/SEO.md
-```
+Follow docs/SEO.md for implementation details.
 
 ---
 
-# 16. Task Execution Pattern
+## 16. Execution Pattern
 
-For every task, follow this pattern:
+For every task:
 
-```txt
 1. Read relevant docs
 2. Inspect existing files
-3. Plan changes
-4. Make small changes
+3. Plan small changes
+4. Implement incrementally
 5. Reuse existing components/data
-6. Run lint/build if possible
-7. Update STATUS.md
-8. Explain what changed
-```
+6. Run lint/build when feasible
+7. Update docs/STATUS.md
+8. Summarize what changed
 
-Do not jump directly into huge changes.
-
----
-
-# 17. Anti-Hallucination Rule
-
-If unsure, the AI must say:
-
-```txt
-I need to inspect the current file first.
-```
-
-The AI must not invent:
-
-```txt
-existing functions
-existing folders
-existing database tables
-existing API routes
-existing packages
-```
-
-Always check the actual project structure.
+Do not jump into large unplanned rewrites.
 
 ---
 
-# 18. Recommended Continuation Prompt
+## 17. Anti-Hallucination Rule
 
-When starting a new AI session, paste this:
+If uncertain, inspect the real file first.
+
+Never invent:
+
+- Functions
+- Folders
+- Tables
+- API routes
+- Packages
+
+Always verify against the current repository state.
+
+---
+
+## 18. Recommended Session Prompt
+
+Use this when starting a new AI session:
 
 ```txt
 Read docs/FLOW.md first.
@@ -466,113 +345,43 @@ Then read:
 - docs/BACKEND.md
 - docs/SEO.md
 
-Continue the OPEDS Melbourne PDS project from the current STATUS.md.
+Continue the OPEDS Melbourne PDS project from current STATUS.md.
 Do not hallucinate files. Inspect existing files first.
-Follow the architecture, security, frontend, backend, UI/UX, and SEO rules.
+Follow architecture, security, frontend, backend, UI/UX, and SEO rules.
 After finishing the task, update docs/STATUS.md.
 ```
 
 ---
 
-# 19. Emergency Recovery Rule
+## 19. Emergency Recovery Rule
 
 If the project becomes messy:
 
-```txt
 1. Stop coding
-2. Read FLOW.md
-3. Read STATUS.md
+2. Read docs/FLOW.md
+3. Read docs/STATUS.md
 4. Run npm run lint
 5. Run npm run build
 6. List broken files
 7. Fix one issue at a time
-8. Update STATUS.md
-```
+8. Update docs/STATUS.md
 
-Do not rewrite the whole project unless required.
+Avoid full rewrites unless explicitly required.
 
 ---
 
-# 20. Final Rule
+## 20. Final Rule
 
-The AI must act like a senior engineer, not a random code generator.
+Act like a senior engineer, not a random generator.
 
-Every change must improve:
+Every change should improve one or more of:
 
-```txt
-Security
-Performance
-SEO
-UI/UX
-Maintainability
-Scalability
-Business value
-```
+- Security
+- Performance
+- SEO
+- UI/UX
+- Maintainability
+- Scalability
+- Business value
 
-If a change does not improve these, do not add it.
-
-````
-
-Also create:
-
-```txt
-docs/STATUS.md
-````
-
-Paste this starting version:
-
-```md
-# STATUS.md
-
-## Current Phase
-Phase 1 — Public Website MVP
-
-## Project
-OPEDS Melbourne PDS demo
-
-## Completed Work
-- Next.js project created
-- Documentation folder created
-- Security rules created
-- Frontend rules created
-- Backend rules created
-- UI/UX rules created
-- SEO rules created
-- Project plan created
-- Basic data folder created
-- Melbourne PDS logo added
-
-## Current Focus
-Build the public website first using clean reusable components.
-
-## Next Step
-Create or improve:
-- Navbar
-- Hero section
-- TrustBar
-- ServicesGrid
-- CallbackForm
-- Footer
-
-## Important Rules
-- Keep Melbourne PDS logo unchanged
-- Use blue/green brand palette
-- Use orange only for emergency CTAs
-- Mobile-first design
-- Large readable text for users aged 20–80+
-- Follow docs/UI_UX.md and docs/FRONTEND.md
-- Do not add backend yet
-- Do not add random packages
-- Keep content in data/config files
-
-## Known Issues
-- Need to confirm current component structure before editing
-- Need to ensure build runs cleanly
-
-## Commands To Run
-npm run dev
-npm run lint
-npm run build
-```
-
-This will let Claude/GPT/Gemini continue from same place without losing context.
+If a change improves none of these, do not add it.
