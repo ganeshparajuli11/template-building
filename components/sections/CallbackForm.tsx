@@ -7,7 +7,7 @@ export default function CallbackForm() {
       <Card>
         <h2 className="text-2xl font-bold text-[var(--secondary)]">Request a callback in 10 minutes</h2>
         <p className="mt-2 text-sm text-gray-600">
-          No database yet. This is the first UI shell for lead intake and operations flow.
+		  Tell us what is happening and a Melbourne PDS plumber will call you back shortly.
         </p>
         <form className="mt-5 grid gap-3 md:grid-cols-2">
           <input className="rounded-xl border border-[var(--border)] px-3 py-2" placeholder="Full name" />

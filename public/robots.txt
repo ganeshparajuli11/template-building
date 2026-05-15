@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /dashboard
+
+# Host
+Host: https://melbournepds.opeds.app
+
+# Sitemaps
+Sitemap: https://melbournepds.opeds.app/sitemap.xml

@@ -13,7 +13,7 @@ export default function QuoteEstimator() {
       <Card className="bg-gradient-to-br from-white to-blue-50">
         <h2 className="text-2xl font-bold text-[var(--secondary)]">Instant quote preview</h2>
         <p className="mt-2 text-sm text-gray-600">
-          A simple estimator UI to improve conversion before full backend rules are connected.
+		  Indicative starting prices for common Melbourne plumbing jobs.
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {estimateRows.map((row) => (

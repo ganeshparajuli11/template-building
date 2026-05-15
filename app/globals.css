@@ -50,6 +50,12 @@ html {
 	scroll-behavior: smooth;
 }
 
+@media (max-width: 767px) {
+	body {
+		padding-bottom: 72px;
+	}
+}
+
 /* Gradient utility for water-to-energy theme */
 .gradient-water {
 	background: linear-gradient(135deg, #0d7f8c 0%, #0891b2 50%, #10b981 100%);

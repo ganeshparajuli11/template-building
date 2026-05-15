@@ -1,48 +1,104 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
 
-import { motion } from "framer-motion";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+const trustItems = [
+	"Licensed & Insured",
+	"24/7 Emergency",
+	"Same Day Response",
+	"5-Star Rated",
+];
 
 export default function Hero() {
 	return (
-		<section className="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-2 md:py-24">
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6 }}
-				viewport={{ once: true }}
-				className="space-y-5"
-			>
-				<Badge>Emergency Plumbing + Business OS</Badge>
-				<h1 className="text-4xl font-black leading-tight tracking-tight text-[var(--secondary)] md:text-5xl">
-					One platform for your website, leads, SEO, and operations.
-				</h1>
-				<p className="text-lg text-gray-600">
-					Keep your public site conversion-focused while your team tracks callbacks, quotes,
-					and performance in one admin dashboard.
-				</p>
-				<div className="flex flex-wrap gap-3">
-					<Button href="/contact">Get Instant Callback</Button>
-					<Button href="/dashboard" variant="outline">
-						View Dashboard
-					</Button>
+		<section className="relative isolate flex flex-col overflow-hidden bg-[#f8fafc] md:h-[calc(100vh-110px)] md:justify-center">
+
+			{/* ── DESKTOP: full-bleed background image + directional overlay ── */}
+			<div className="absolute inset-0 hidden md:block" aria-hidden="true">
+				<Image
+					src="/images/bg-image.png"
+					alt=""
+					fill
+					sizes="100vw"
+					className="object-cover object-right"
+					priority
+					quality={90}
+				/>
+				{/* Left-opaque → right-transparent gradient */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background:
+							"linear-gradient(90deg, rgba(248,250,252,0.97) 0%, rgba(248,250,252,0.92) 30%, rgba(248,250,252,0.60) 55%, rgba(248,250,252,0.15) 75%, rgba(248,250,252,0.02) 100%)",
+					}}
+				/>
+			</div>
+
+			{/* ── CONTENT ── */}
+			<div className="relative z-10 w-full px-6 py-12 sm:px-10 md:max-w-[54%] md:py-0 md:pl-10 md:pr-6 lg:pl-14 xl:max-w-[52%] xl:pl-20">
+
+				{/* Badge */}
+				<div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600 ring-1 ring-orange-200">
+					<span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-orange-500" aria-hidden="true" />
+					24/7 Emergency Plumbing Across Melbourne
 				</div>
-			</motion.div>
-			<motion.div
-				initial={{ opacity: 0, scale: 0.95 }}
-				whileInView={{ opacity: 1, scale: 1 }}
-				transition={{ duration: 0.6, delay: 0.2 }}
-				viewport={{ once: true }}
-				className="rounded-2xl border border-[var(--border)] bg-gradient-to-br from-blue-50 to-amber-50 p-6"
-			>
-				<p className="mb-3 text-sm font-semibold text-gray-500">Today at a glance</p>
-				<ul className="space-y-3 text-sm text-[var(--secondary)]">
-					<li className="rounded-xl bg-white p-3">24 new leads captured</li>
-					<li className="rounded-xl bg-white p-3">SEO health score improved to 86%</li>
-					<li className="rounded-xl bg-white p-3">17 quote requests from website visitors</li>
-				</ul>
-			</motion.div>
+
+				{/* Heading — 3-line forced rhythm, scales from 40px → 76px */}
+				<h1 className="text-[2.5rem] font-black leading-[1.0] tracking-tight text-[#0b1d3a] sm:text-[3.2rem] md:text-[3.6rem] lg:text-[4.2rem] xl:text-[4.75rem]">
+					<span className="block">Reliable Melbourne</span>
+					<span className="block text-[var(--primary)]">Plumbing &amp; Drainage</span>
+					<span className="block">When It Matters Most</span>
+				</h1>
+
+				{/* Paragraph */}
+				<p className="mt-5 max-w-[460px] text-base leading-relaxed text-slate-600 sm:text-lg md:mt-6 lg:text-[1.2rem]">
+					Fast support for blocked drains, leaks, hot water issues, and emergency repairs. Licensed Melbourne experts, ready for same-day response.
+				</p>
+
+				{/* CTA buttons */}
+				<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9">
+					<a
+						href="tel:0431234185"
+						className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-9 text-base font-bold text-white shadow-xl shadow-cyan-200/60 transition hover:bg-[var(--primary-dark)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] lg:text-lg"
+					>
+						<svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+							<path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+						</svg>
+						Call 0431 234 185
+					</a>
+					<Link
+						href="/contact"
+						className="inline-flex h-14 items-center justify-center rounded-xl border-2 border-slate-300 bg-white/90 px-9 text-base font-bold text-slate-800 backdrop-blur-sm transition hover:border-[var(--primary)] hover:text-[var(--primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] lg:text-lg"
+					>
+						Request Callback
+					</Link>
+				</div>
+
+				{/* Trust indicators */}
+				<div className="mt-7 flex flex-wrap gap-x-6 gap-y-2">
+					{trustItems.map((label) => (
+						<span key={label} className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500">
+							<svg className="h-4 w-4 shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+								<path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+							</svg>
+							{label}
+						</span>
+					))}
+				</div>
+			</div>
+
+			{/* ── MOBILE: image block below content ── */}
+			<div className="relative h-52 w-full overflow-hidden sm:h-64 md:hidden">
+				<Image
+					src="/images/bg-image.png"
+					alt="MPDS licensed plumber standing in front of branded service van, Melbourne"
+					fill
+					sizes="100vw"
+					className="object-cover object-[35%_center]"
+					priority
+				/>
+			</div>
+
 		</section>
 	);
 }
+
