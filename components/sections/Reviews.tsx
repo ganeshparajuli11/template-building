@@ -1,7 +1,7 @@
 "use client";
 
 import { Star, ChevronLeft, ChevronRight, BadgeCheck } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { reviews, type ExtendedReview } from "@/data/reviews";
 
 const avatarColors = [
@@ -157,7 +157,7 @@ export default function Reviews() {
 													<BadgeCheck className="ml-1 h-4 w-4 text-blue-500 fill-white" />
 												</div>
 												<p className="text-sm leading-relaxed text-slate-700">
-													"{review.text}"
+													&ldquo;{review.text}&rdquo;
 												</p>
 											</div>
 										</div>

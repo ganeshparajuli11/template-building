@@ -23,7 +23,7 @@ export default function FAQ() {
 						Frequently Asked Questions
 					</h2>
 					<p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-						Got a question? We've got answers. If you can't find what you're looking for, feel free to give us a call.
+						Got a question? We&apos;ve got answers. If you can&apos;t find what you&apos;re looking for, feel free to give us a call.
 					</p>
 				</div>
 

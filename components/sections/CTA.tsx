@@ -31,7 +31,7 @@ export default function CTA() {
 					</h2>
 					
 					<p className="mb-10 text-lg font-medium text-cyan-50 max-w-2xl mx-auto opacity-90 sm:text-xl">
-						Don't let a plumbing emergency damage your property. Our fully licensed Melbourne experts are ready to respond immediately.
+						Don&apos;t let a plumbing emergency damage your property. Our fully licensed Melbourne experts are ready to respond immediately.
 					</p>
 
 					<div className="flex flex-col gap-4 sm:flex-row justify-center w-full sm:w-auto">
