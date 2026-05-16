@@ -4,12 +4,16 @@ import CallbackForm from "@/components/sections/CallbackForm";
 import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import LocalSeoContent from "@/components/sections/LocalSeoContent";
 import Locations from "@/components/sections/Locations";
 import Navbar from "@/components/layout/Navbar";
 import QuoteEstimator from "@/components/sections/QuoteEstimator";
 import Reviews from "@/components/sections/Reviews";
 import ServicesGrid from "@/components/sections/ServicesGrid";
+import ScrollReveal from "@/components/sections/ScrollReveal";
 import TrustBar from "@/components/sections/TrustBar";
+import { siteConfig } from "@/config/site";
+import { services } from "@/data/services";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
@@ -17,6 +21,7 @@ export const metadata: Metadata = createMetadata({
 	description:
 		"24/7 emergency plumbing in Melbourne. Blocked drains, burst pipes, hot water repairs, same-day response. Licensed & insured. Call 0431 234 185 now.",
 	path: "/",
+	image: "/images/person-with-van.webp",
 	keywords: [
 		"emergency plumber Melbourne",
 		"24/7 plumber Melbourne",
@@ -83,26 +88,85 @@ const faqSchema = {
 	],
 };
 
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"@id": `${siteConfig.url}/#website`,
+	url: siteConfig.url,
+	name: siteConfig.name,
+	description: siteConfig.description,
+	inLanguage: "en-AU",
+	publisher: {
+		"@id": `${siteConfig.url}/#business`,
+	},
+};
+
+const webpageSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"@id": `${siteConfig.url}/#webpage`,
+	url: siteConfig.url,
+	name: "Emergency Plumber Melbourne | Melbourne Plumbing and Drainage Solutions",
+	description: siteConfig.description,
+	inLanguage: "en-AU",
+	isPartOf: {
+		"@id": `${siteConfig.url}/#website`,
+	},
+	about: {
+		"@id": `${siteConfig.url}/#business`,
+	},
+	primaryImageOfPage: {
+		"@type": "ImageObject",
+		url: `${siteConfig.url}/images/person-with-van.webp`,
+	},
+	breadcrumb: {
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteConfig.url,
+			},
+		],
+	},
+};
+
+const itemListSchema = {
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	name: "Top plumbing services in Melbourne",
+	itemListElement: services.slice(0, 5).map((service, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		name: service.name,
+		url: `${siteConfig.url}/services`,
+	})),
+};
+
 export default function Home() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <div className="min-h-screen bg-[var(--background)]">
-        <Navbar />
-        <Hero />
-        <TrustBar />
-        <ServicesGrid />
-        <QuoteEstimator />
-        <CallbackForm />
-        <Reviews />
-        <FAQ />
-        <Locations />
-        <CTA />
-        <Footer />
-      </div>
-    </>
-  );
+	return (
+		<>
+			<script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+			<script type="application/ld+json">{JSON.stringify(webpageSchema)}</script>
+			<script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+			<script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+			<div className="min-h-screen bg-[var(--background)]">
+				<Navbar />
+				<main>
+					<Hero />
+					<ScrollReveal delay={0.05}><TrustBar /></ScrollReveal>
+					<ScrollReveal delay={0.08}><ServicesGrid /></ScrollReveal>
+					<ScrollReveal delay={0.1}><QuoteEstimator /></ScrollReveal>
+					<ScrollReveal delay={0.12}><CallbackForm /></ScrollReveal>
+					<ScrollReveal delay={0.14}><Reviews /></ScrollReveal>
+					<ScrollReveal delay={0.16}><FAQ /></ScrollReveal>
+					<ScrollReveal delay={0.18}><Locations /></ScrollReveal>
+					<ScrollReveal delay={0.2}><LocalSeoContent /></ScrollReveal>
+					<ScrollReveal delay={0.22}><CTA /></ScrollReveal>
+				</main>
+				<Footer />
+			</div>
+		</>
+	);
 }
