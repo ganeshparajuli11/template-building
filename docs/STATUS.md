@@ -7,6 +7,55 @@ Phase 1 - Public Website MVP + DevOps automation baseline
 OPEDS Melbourne PDS demo
 
 ## Completed Work
+- Upgraded admin dashboard to a more professional SaaS finish with improved typography (Manrope), corrected route-title matching in header, and stronger visual hierarchy
+- Added shared admin page header component for consistent section framing across Leads, SEO, Analytics, Connectors, Settings, and Overview
+- Increased page density and reduced empty areas (especially on SEO) with additional monochrome KPI/insight cards and cleaner panel composition
+- Polished card system and shell details (subtle premium shadows, spacing rhythm, tighter headings, neutral controls)
+- Re-validated the final admin polish with successful lint and production build checks
+- Redesigned the entire admin dashboard into a separate premium black/white SaaS visual system with dark fixed sidebar, monochrome header controls, and stronger typography hierarchy
+- Reworked overview content structure to match business-facing scanning needs: Melbourne PDS label, Business Overview title, KPI cards, leads table, SEO health panel, and connector status blocks
+- Added reusable admin card primitive and applied neutral-only styles across /dashboard, /dashboard/leads, /dashboard/seo, /dashboard/analytics, /dashboard/connectors, and /dashboard/settings
+- Kept admin and public branding separated: public site remains Melbourne PDS color-driven while admin stays black/white/grey only
+- Re-validated the full admin redesign with successful lint and production build checks
+- Created a separate admin navigation shell with dedicated sidebar + mobile drawer, independent from the public website navbar/footer
+- Added core admin routes: /dashboard, /dashboard/leads, /dashboard/seo, /dashboard/analytics, /dashboard/connectors, /dashboard/settings
+- Added docs/ADMIN_PROMPT.md containing the requested Claude/Cursor prompt for TailAdmin-first admin build direction
+- Re-validated admin route expansion with successful lint and production build checks
+- Simplified the admin login page into a normal centered form at /admin/login and removed the public-facing promotional layout
+- Added a sample user record in user.md for the admin panel prototype
+- Re-validated the login redesign with successful lint and production build checks
+- Moved the login screen from /login to /admin/login and removed the public navbar entry so the client-facing site no longer advertises the admin entry point
+- Kept the admin login screen as a prototype-only route with noindex metadata
+- Re-validated the route migration with successful lint and production build checks
+- Created a polished prototype admin login page at /login with a branded access screen, accessible form fields, and a demo route into the dashboard
+- Added an Admin Login entry point to the shared navbar so the login screen is reachable from the public site
+- Re-validated the login route and navigation update with successful lint and production build checks
+- Added dashboard-side scroll reveal motion with staggered admin sections and animated KPI cards for a more polished backend-facing experience
+- Kept dashboard motion client-isolated and lightweight while preserving the server-rendered page structure
+- Re-validated the admin dashboard with successful lint and production build checks
+- Added a reusable scroll-reveal motion wrapper and applied it to the main homepage sections for visible animation while scrolling
+- Kept motion lightweight and isolated so the site still renders efficiently and remains easy to maintain
+- Re-validated the homepage with successful lint and production build checks
+- Added visible homepage motion: hero entrance reveals, floating status card, and a stronger desktop parallax layer so the site feels actively animated on load
+- Converted the hero section to a client component to support Framer Motion without server prerender errors
+- Re-validated the animation update with successful lint and production build checks
+- Moved homepage JSON-LD out of the root head into the body and added hydration-warning suppression to reduce browser-extension mismatch noise in development
+- Tightened the mobile hero image sizing hint to align with the actual rendered width and reduce Next image warnings
+- Re-validated the site with successful lint and production build checks
+- Fixed Next image quality configuration for the hero background and refined image sizing hints to reduce runtime warnings
+- Added suppressHydrationWarning to the root layout to ignore browser-extension injected attribute noise during development
+- Re-validated the site with successful lint and production build checks
+- Added a minimal scroll-based hero parallax layer with reduced-motion support to make the homepage feel more premium and experienced
+- Kept animation isolated in a small client component so the rest of the homepage remains lightweight and server-rendered
+- Re-validated animation changes with successful lint and production build checks
+- Implemented full homepage SEO pass with richer metadata defaults, canonical/language coverage, and production-safe OG image path
+- Added comprehensive homepage structured data (WebSite, WebPage, FAQPage, ItemList) to improve crawl context and SERP eligibility
+- Added semantic homepage main landmark and local SEO content block with internal links to key conversion pages
+- Enhanced global LocalBusiness schema with logo, image, aggregate rating, and stable business @id references
+- Re-validated SEO implementation with successful lint and production build checks
+- Built a production-ready multi-column footer with strong contact CTA actions, quick links, service-area coverage text, and business trust messaging
+- Replaced minimal footer with responsive mobile-first layout aligned to navbar visual language and project brand tokens
+- Verified footer implementation with successful lint and production build checks
 - Added GitHub Actions CI for lint and production build
 - Added security workflow (Dependency Review, npm audit, CodeQL)
 - Added issue triage workflow with auto-labeling and first-response checklist
@@ -71,6 +120,66 @@ OPEDS Melbourne PDS demo
 - Rebuilt the `Reviews` component to mimic an authentic Google Business reviews layout, complete with SVG Google logos, dynamic colourful avatars, and a 5.0 overall rating header to strongly reinforce social proof.
 
 ## Files Changed
+- app/dashboard/layout.tsx
+- components/admin/AdminPageHeader.tsx
+- components/admin/AdminLayoutShell.tsx
+- components/admin/AdminCard.tsx
+- components/dashboard/DashboardOverview.tsx
+- app/dashboard/leads/page.tsx
+- app/dashboard/seo/page.tsx
+- app/dashboard/analytics/page.tsx
+- app/dashboard/connectors/page.tsx
+- app/dashboard/settings/page.tsx
+- components/admin/AdminCard.tsx
+- components/admin/AdminLayoutShell.tsx
+- components/dashboard/DashboardOverview.tsx
+- components/dashboard/AnalyticsCards.tsx
+- components/dashboard/LeadsTable.tsx
+- components/dashboard/SEOScoreCard.tsx
+- components/dashboard/ConnectorStatus.tsx
+- app/dashboard/leads/page.tsx
+- app/dashboard/seo/page.tsx
+- app/dashboard/analytics/page.tsx
+- app/dashboard/connectors/page.tsx
+- app/dashboard/settings/page.tsx
+- components/admin/AdminLayoutShell.tsx
+- app/dashboard/layout.tsx
+- app/dashboard/page.tsx
+- app/dashboard/leads/page.tsx
+- app/dashboard/seo/page.tsx
+- app/dashboard/analytics/page.tsx
+- app/dashboard/connectors/page.tsx
+- app/dashboard/settings/page.tsx
+- components/dashboard/DashboardOverview.tsx
+- docs/ADMIN_PROMPT.md
+- app/admin/login/page.tsx
+- components/auth/LoginForm.tsx
+- user.md
+- app/admin/login/page.tsx
+- app/login/page.tsx
+- components/auth/LoginForm.tsx
+- components/layout/Navbar.tsx
+- components/dashboard/DashboardReveal.tsx
+- components/dashboard/AnalyticsCards.tsx
+- components/dashboard/LeadsTable.tsx
+- components/dashboard/SEOScoreCard.tsx
+- components/dashboard/ConnectorStatus.tsx
+- components/dashboard/DashboardOverview.tsx
+- components/sections/ScrollReveal.tsx
+- app/page.tsx
+- components/sections/Hero.tsx
+- components/sections/HeroParallax.tsx
+- app/layout.tsx
+- components/sections/Hero.tsx
+- next.config.ts
+- components/sections/Hero.tsx
+- components/sections/HeroParallax.tsx
+- app/layout.tsx
+- app/page.tsx
+- lib/seo.ts
+- components/sections/LocalSeoContent.tsx
+- components/layout/Footer.tsx
+- public/sitemap-0.xml
 - .github/dependabot.yml
 - .github/labeler.yml
 - .github/pull_request_template.md
@@ -116,7 +225,8 @@ OPEDS Melbourne PDS demo
 Stabilize project standards and keep public website content consistent with Melbourne PDS positioning.
 
 ## Next Step
-- Add page-level metadata for /about, /contact, /services, and /locations
+- Run Google Search Console verification and submit sitemap, then monitor indexing/query trends
+- Add dedicated service-location landing pages (for example, blocked drains + suburb pages) to target transactional long-tail keywords
 - Tune navbar visuals and spacing to final brand polish based on design feedback
 - Polish Phase 1 public sections (Hero, TrustBar, ServicesGrid, CallbackForm, Footer)
 - Keep workflows setup tasks tracked but separate from public website iteration
@@ -124,9 +234,11 @@ Stabilize project standards and keep public website content consistent with Melb
 ## Known Issues
 - project-automation.yml is intentionally gated until vars and secret are configured
 - uptime-monitor.yml is intentionally gated until PRODUCTION_URL is configured
-- Public route metadata is currently centralized and should be extended per route for stronger SEO
+- Sitemap timestamp file changes after each build and should be committed only when intended
 
 ## Commands Run
+- npm run lint
+- npm run build
 - npm run lint
 - npm run build
 

@@ -8,9 +8,12 @@ export const metadata: Metadata = createMetadata();
 const localBusinessSchema = {
 	"@context": "https://schema.org",
 	"@type": ["LocalBusiness", "Plumber"],
+	"@id": `${siteConfig.url}/#business`,
 	name: siteConfig.name,
 	description: siteConfig.description,
 	url: siteConfig.url,
+	logo: `${siteConfig.url}/logo.png`,
+	image: `${siteConfig.url}/images/person-with-van.webp`,
 	telephone: siteConfig.phoneRaw,
 	email: siteConfig.email,
 	address: {
@@ -30,6 +33,11 @@ const localBusinessSchema = {
 	areaServed: {
 		"@type": "City",
 		name: "Melbourne",
+	},
+	aggregateRating: {
+		"@type": "AggregateRating",
+		ratingValue: "5.0",
+		reviewCount: "58",
 	},
 	hasOfferCatalog: {
 		"@type": "OfferCatalog",
@@ -51,14 +59,14 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en-AU">
-			<head>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-				/>
-			</head>
-			<body>{children}</body>
+		<html lang="en-AU" suppressHydrationWarning>
+			<head suppressHydrationWarning />
+			<body suppressHydrationWarning>
+				<script type="application/ld+json" suppressHydrationWarning>
+					{JSON.stringify(localBusinessSchema)}
+				</script>
+				{children}
+			</body>
 		</html>
 	);
 }

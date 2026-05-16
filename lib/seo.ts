@@ -14,7 +14,7 @@ export function createMetadata({
 	title = siteConfig.title,
 	description = siteConfig.description,
 	path = "",
-	image = "/og-image.jpg",
+	image = "/images/person-with-van.webp",
 	noIndex = false,
 	keywords,
 }: Partial<PageSEO> = {}): Metadata {
@@ -25,8 +25,16 @@ export function createMetadata({
 		description,
 		keywords: keywords ?? siteConfig.keywords,
 		metadataBase: new URL(siteConfig.url),
+		applicationName: siteConfig.name,
+		authors: [{ name: siteConfig.name, url: siteConfig.url }],
+		creator: siteConfig.name,
+		publisher: siteConfig.name,
+		category: "Home Services",
 		alternates: {
 			canonical: pageUrl,
+			languages: {
+				"en-AU": pageUrl,
+			},
 		},
 		openGraph: {
 			title,
