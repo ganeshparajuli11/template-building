@@ -60,6 +60,15 @@ OPEDS Melbourne PDS demo
 - Kept hero focused on product intro, short value statement, and clear dual CTA actions
 - Refined image composition to a cleaner wide visual with softer glow/shadow and less decorative clutter
 - Re-validated hero simplification with successful lint and production build
+- Updated top bar 'Emergency Plumbing 24/7' button size and styling to be pill-shaped with more padding to match design requirements
+- Adjusted main navbar call-to-action buttons to have pill shapes (rounded-full) matching the hero and top bar aesthetics
+- Increased top bar height to 48px and button min-height to 40px with proper focus styles to meet UI_UX.md accessibility standards
+- Completely redesigned the TrustBar component with a modern, divided grid layout using Lucide React icons, building immediate credibility right below the fold.
+- Expanded `data/services.ts` to include 8 core real-world plumbing services matching the reference site, mapped to photographic image URLs.
+- Completely revamped the ServicesGrid component into a premium 4-column card layout using real generated photography instead of abstract icons to ensure clarity across all age demographics, with hover zoom interactions.
+- Transformed the `QuoteEstimator` from static text into an interactive, state-driven React component allowing users to dynamically calculate pricing based on service type and urgency level.
+- Redesigned the `CallbackForm` into a premium two-column layout, combining contact information and trust signals (left) with large, accessible form inputs (right) to drive conversions.
+- Rebuilt the `Reviews` component to mimic an authentic Google Business reviews layout, complete with SVG Google logos, dynamic colourful avatars, and a 5.0 overall rating header to strongly reinforce social proof.
 
 ## Files Changed
 - .github/dependabot.yml
