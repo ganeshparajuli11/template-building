@@ -26,20 +26,20 @@ export default function Navbar() {
 	return (
 		<>
 			<header className="sticky top-0 z-50 border-b border-[var(--border)] bg-white/95 backdrop-blur">
-				<div className="hidden h-[34px] border-b border-cyan-800/80 bg-[var(--primary)] md:block">
-					<div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 text-xs font-semibold text-white">
+				<div className="hidden h-[48px] border-b border-cyan-800/80 bg-[var(--primary)] md:block">
+					<div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 text-sm font-semibold text-white">
 						<div className="flex items-center gap-5">
-							<a href="tel:0431234185" className="hover:text-cyan-100">
+							<a href="tel:0431234185" className="rounded-md transition hover:text-cyan-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
 								Call: 0431 234 185
 							</a>
-							<a href="mailto:melbournepds@gmail.com" className="hidden hover:text-cyan-100 lg:inline">
+							<a href="mailto:melbournepds@gmail.com" className="hidden rounded-md transition hover:text-cyan-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:inline">
 								melbournepds@gmail.com
 							</a>
 							<p className="text-cyan-50">24-hour emergency service</p>
 						</div>
 						<Link
 							href="/contact"
-							className="rounded-md bg-[var(--accent-warm)] px-3 py-1 text-xs font-bold text-white transition hover:opacity-90"
+							className="inline-flex min-h-[40px] items-center justify-center rounded-full bg-[var(--accent-warm)] px-6 text-sm font-bold tracking-wide text-white shadow-sm transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 						>
 							Emergency Plumbing 24/7
 						</Link>
@@ -77,13 +77,13 @@ export default function Navbar() {
 					<div className="hidden items-center gap-2 md:flex">
 						<a
 							href="tel:0431234185"
-							className="inline-flex min-h-11 items-center rounded-xl bg-[var(--accent-warm)] px-4 text-sm font-bold text-white shadow-sm transition hover:opacity-90"
+							className="inline-flex min-h-11 items-center rounded-full bg-[var(--accent-warm)] px-6 text-sm font-bold text-white shadow-sm transition hover:opacity-90"
 						>
 							Call 0431 234 185
 						</a>
 						<Link
 							href="/contact"
-							className="inline-flex min-h-11 items-center rounded-xl border border-[var(--border)] px-4 text-sm font-semibold text-[var(--secondary)] transition hover:bg-[var(--muted)]"
+							className="inline-flex min-h-11 items-center rounded-full border border-[var(--border)] px-6 text-sm font-semibold text-[var(--secondary)] transition hover:bg-[var(--muted)]"
 						>
 							Request Callback
 						</Link>
