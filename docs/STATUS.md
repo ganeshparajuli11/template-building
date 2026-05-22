@@ -7,6 +7,9 @@ Phase 1 - Public Website MVP + DevOps automation baseline
 OPEDS Melbourne PDS demo
 
 ## Completed Work
+- Redesigned the public Contact page with clearer contact cards (phone, email, availability) and a cleaner callback section entry
+- Connected the callback/contact form to a backend API route (`/api/contact`) with server-side Zod validation, safe response shape, and basic anti-spam honeypot handling
+- Added a lightweight contact submission service and integrated dashboard Leads table with live form submissions so admins can review incoming enquiries
 - Upgraded admin dashboard to a more professional SaaS finish with improved typography (Manrope), corrected route-title matching in header, and stronger visual hierarchy
 - Added shared admin page header component for consistent section framing across Leads, SEO, Analytics, Connectors, Settings, and Overview
 - Increased page density and reduced empty areas (especially on SEO) with additional monochrome KPI/insight cards and cleaner panel composition
@@ -120,6 +123,12 @@ OPEDS Melbourne PDS demo
 - Rebuilt the `Reviews` component to mimic an authentic Google Business reviews layout, complete with SVG Google logos, dynamic colourful avatars, and a 5.0 overall rating header to strongly reinforce social proof.
 
 ## Files Changed
+- app/contact/page.tsx
+- components/sections/CallbackForm.tsx
+- app/api/contact/route.ts
+- lib/services/contact-submissions.ts
+- lib/validators/contact.ts
+- components/dashboard/LeadsTable.tsx
 - app/dashboard/layout.tsx
 - components/admin/AdminPageHeader.tsx
 - components/admin/AdminLayoutShell.tsx
@@ -222,14 +231,12 @@ OPEDS Melbourne PDS demo
 - components/layout/Navbar.tsx
 
 ## Current Focus
-Stabilize project standards and keep public website content consistent with Melbourne PDS positioning.
+Complete callback/contact backend hardening and admin lead visibility from real form submissions.
 
 ## Next Step
-- Run Google Search Console verification and submit sitemap, then monitor indexing/query trends
-- Add dedicated service-location landing pages (for example, blocked drains + suburb pages) to target transactional long-tail keywords
-- Tune navbar visuals and spacing to final brand polish based on design feedback
-- Polish Phase 1 public sections (Hero, TrustBar, ServicesGrid, CallbackForm, Footer)
-- Keep workflows setup tasks tracked but separate from public website iteration
+- Add persistent database-backed lead storage (Supabase) and tenant-aware access controls for dashboard leads
+- Add authentication/authorization checks for dashboard lead endpoints
+- Add contact endpoint rate limiting and audit logging to align with security standards
 
 ## Known Issues
 - project-automation.yml is intentionally gated until vars and secret are configured
@@ -237,6 +244,9 @@ Stabilize project standards and keep public website content consistent with Melb
 - Sitemap timestamp file changes after each build and should be committed only when intended
 
 ## Commands Run
+- npm ci
+- npm run lint
+- npm run build
 - npm run lint
 - npm run build
 - npm run lint

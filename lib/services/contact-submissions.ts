@@ -28,7 +28,7 @@ function getStore() {
 }
 
 function sanitize(value?: string) {
-	return (value ?? "").replace(/<[^>]*>/g, "").trim();
+	return (value ?? "").trim();
 }
 
 export async function createContactSubmission(input: ContactSubmissionInput) {
