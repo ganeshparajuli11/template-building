@@ -10,7 +10,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.110.0",
+    "@supabase/supabase-js": "^2.110.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
